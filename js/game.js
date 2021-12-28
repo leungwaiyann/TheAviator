@@ -82,7 +82,6 @@ function resetGame(){
 
           status : "playing",
          };
-  fieldLevel.innerHTML = Math.floor(game.level);
 }
 
 //THREEJS RELATED VARIABLES
@@ -167,7 +166,7 @@ function handleTouchMove(event) {
 
 function handleMouseUp(event){
   if (game.status == "waitingReplay"){
-    resetGame();
+    // resetGame();
     hideReplay();
   }
 }
@@ -175,7 +174,7 @@ function handleMouseUp(event){
 
 function handleTouchEnd(event){
   if (game.status == "waitingReplay"){
-    resetGame();
+    // resetGame();
     hideReplay();
   }
 }
@@ -838,15 +837,14 @@ function loop(){
     if (Math.floor(game.distance)%game.distanceForLevelUpdate == 0 && Math.floor(game.distance) > game.levelLastUpdate){
       game.levelLastUpdate = Math.floor(game.distance);
       game.level++;
-      fieldLevel.innerHTML = Math.floor(game.level);
 
       game.targetBaseSpeed = game.initSpeed + game.incrementSpeedByLevel*game.level
     }
 
 
     updatePlane();
-    updateDistance();
-    updateEnergy();
+    // updateDistance();
+    // updateEnergy();
     game.baseSpeed += (game.targetBaseSpeed - game.baseSpeed) * deltaTime * 0.02;
     game.speed = game.baseSpeed * game.planeSpeed;
 
@@ -877,8 +875,8 @@ function loop(){
   coinsHolder.rotateCoins();
   ennemiesHolder.rotateEnnemies();
 
-  sky.moveClouds();
-  sea.moveWaves();
+  // sky.moveClouds();
+  // sea.moveWaves();
 
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
@@ -971,7 +969,7 @@ function normalize(v,vmin,vmax,tmin, tmax){
   return tv;
 }
 
-var fieldDistance, energyBar, replayMessage, fieldLevel, levelCircle;
+var fieldDistance, energyBar, replayMessage, levelCircle;
 
 function init(event){
 
@@ -980,7 +978,6 @@ function init(event){
   fieldDistance = document.getElementById("distValue");
   energyBar = document.getElementById("energyBar");
   replayMessage = document.getElementById("replayMessage");
-  fieldLevel = document.getElementById("levelValue");
   levelCircle = document.getElementById("levelCircleStroke");
 
   resetGame();
